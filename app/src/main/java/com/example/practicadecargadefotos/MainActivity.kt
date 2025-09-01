@@ -37,8 +37,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PracticaDeCargaDeFotosTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) {
-                    ElegirFoto()
+                Scaffold(modifier = Modifier.fillMaxSize()) { contentPadding ->
+                    ElegirFoto(modifier = Modifier.padding(contentPadding))
                 }
             }
         }
@@ -62,7 +62,7 @@ fun GreetingPreview() {
 }
 
 @Composable
-fun ElegirFoto() {
+fun ElegirFoto(modifier: Modifier = Modifier) {
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) {
         uri -> imageUri = uri
@@ -96,5 +96,13 @@ fun ElegirFoto() {
         ) {
             Text("Eliminar foto")
         }
+    }
+}
+
+@Preview
+@Composable
+fun ElegirFotoPreview() {
+    PracticaDeCargaDeFotosTheme {
+        ElegirFoto()
     }
 }
